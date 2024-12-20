@@ -14,7 +14,7 @@ app.use(cors());
 
 // Determine the base URL based on the environment mode
 const baseURL = process.env.MODE === "development" 
-  ? "http://localhost:3000" 
+  ? "http://localhost:3001" 
   : "http://backendonrender.com";
 
 console.log(`Base URL set to: ${baseURL}`);
