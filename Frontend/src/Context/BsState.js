@@ -14,13 +14,17 @@ const BsState = (props) => {
     D2: 0,
   });  // No of seats which the user selects.
 
+  // Determine the base URL based on the environment mode
+  const baseURL = process.env.REACT_APP_MODE === "development" 
+    ? "http://localhost:3000" 
+    : "https://bookmyshow-backend-main.onrender.com";
+
   // handling post request to save booking details on the backend
   const handlePostBooking = async () => {
-    // Sending api request to backend with user selected movie, slot and seats to book movie.
+    // Sending API request to backend with user selected movie, slot and seats to book movie.
     try {
-        
         const res = await fetch(
-          `https://bookmyshow-backend-main.onrender.com/api/booking`,
+          `${baseURL}/api/booking`,
           {
             method: "POST",
             headers: {
@@ -31,7 +35,7 @@ const BsState = (props) => {
         );
         const data = await res.json();
         if (res.status === 200) {
-          //reset the state on success
+          // Reset the state on success
           changeTime("");
           changeMovie("");
           changeNoOfSeats({
@@ -43,24 +47,24 @@ const BsState = (props) => {
             D2: 0,
           });
           setLastBookingData(data.data);
-          //clearing the local storage when booking is successfull
+          // Clearing the local storage when booking is successful
           window.localStorage.clear();
         }
         
     } catch (error) {
         console.log("error", error);
-        return false
+        return false;
     }
-    //showing message from backend on popup to user whether success or error
+    // Showing message from backend on popup to user whether success or error
   };
 
   useEffect(() => {
-    //getting movies, slot and seats from localstorage and updating state (useful when page refreshes)
+    // Getting movies, slot and seats from localStorage and updating state (useful when page refreshes)
     const movie = window.localStorage.getItem("movie");
     const slot = window.localStorage.getItem("slot");
     const seats = JSON.parse(window.localStorage.getItem("seats"));
 
-    if(movie || slot || seats){
+    if (movie || slot || seats) {
       changeMovie(movie);
       changeTime(slot);
       changeNoOfSeats(seats);
@@ -69,7 +73,7 @@ const BsState = (props) => {
   }, []);
 
   return (
-    // providing all the required data to app
+    // Providing all the required data to app
     <BsContext.Provider 
       value={{
         handlePostBooking,

@@ -5,23 +5,33 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
-const bookingRoute = require("./Routes/movieRoute")
+const bookingRoute = require("./Routes/movieRoute");
 
-app.use( bodyParser.urlencoded({ extended: false }) );
-app.use( bodyParser.json() );
-app.use( cors() );
+// Middleware setup
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+
+// Determine the base URL based on the environment mode
+const baseURL = process.env.MODE === "development" 
+  ? "http://localhost:3000" 
+  : "http://backendonrender.com";
+
+console.log(`Base URL set to: ${baseURL}`);
 
 // Connecting to database
 connection();
 
-// creating an api and seperating it.
+// Home route
 app.get("/", async (req, res) => {
-    res.send("hi i am home page")
-})
+    res.send("Hi, I am the home page");
+});
+
+// Use booking routes with the base URL as context
 app.use("/api", bookingRoute);
 
-// listening backend on a port.
+// Listening on the specified port
 const port = process.env.PORT || 8081;
-app.listen( port, () => console.log(`App listening on port ${port}!`) );
+app.listen(port, () => console.log(`App listening on port ${port}!`));
 
 module.exports = app;
