@@ -17,7 +17,7 @@ const BsState = (props) => {
   // Determine the base URL based on the environment mode
   const baseURL = process.env.REACT_APP_MODE === "development" 
     ? "http://localhost:3001" 
-    : "https://bookmyshow-backend-main.onrender.com";
+    : "https://bookmyshow-696x.onrender.com";
 
   // handling post request to save booking details on the backend
   const handlePostBooking = async () => {

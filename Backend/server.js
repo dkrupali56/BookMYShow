@@ -10,7 +10,9 @@ const bookingRoute = require("./Routes/movieRoute");
 // Middleware setup
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+
+// Configure CORS to accept requests from any origin
+app.use(cors({ origin: "*" }));
 
 // Determine the base URL based on the environment mode
 const baseURL = process.env.MODE === "development" 
