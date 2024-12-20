@@ -22,8 +22,7 @@ This backend it built on top of Node.js where the user data is being stored and 
    This is a get request endpoint which is used to get the last booking deatils of user.
 
 #### Contributors :    
-  1. Darshan Vasani[Profile](https://github.com/dpvasani).
-  2. Krupali Desai[Profile](https://github.com/dkrupali56).
+  1. Krupali Desai[Profile](https://github.com/dkrupali56).
 
 
 #### Contributions are always welcome!
